@@ -78,6 +78,61 @@
   };
   services.hardware.bolt.enable = true;
 
+  services.kanata = {
+    enable = true;
+
+    keyboards.livingRoom = {
+      # For the first test, detects all keyboards.
+      # Later, restrict this to your Redragon dongle.
+      devices = [];
+
+      
+    config = ''
+      (defsrc
+        caps spc
+        q e c r f
+        w a s d
+        h j k l
+      )
+
+      (defalias
+        ;; Mouse layer activation
+        mouse-hold (tap-hold-press 200 200 spc (layer-while-held mouse))
+        mouse-on   (layer-switch mouse)
+        mouse-off  (layer-switch base)
+
+        ;; Cursor movement with acceleration
+        left  (movemouse-accel-left  10 750 2 18)
+        down  (movemouse-accel-down  10 750 2 18)
+        up    (movemouse-accel-up    10 750 2 18)
+        right (movemouse-accel-right 10 750 2 18)
+
+        ;; Scrolling
+        scroll-up   (mwheel-up   50 120)
+        scroll-down (mwheel-down 50 120)
+      )
+
+      ;; Normal keyboard mode
+      (deflayer base
+        @mouse-on @mouse-hold
+        _ _ _ _ _
+         _ _ _ _
+        _ _ _ _
+      )
+
+      ;; Mouse control mode
+      (deflayer mouse
+        @mouse-off spc
+        mlft mrgt mmid @scroll-up @scroll-down
+        @up @left @down @right
+        @left @down @up @right
+      )
+    '';
+
+    };
+  };
+
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
