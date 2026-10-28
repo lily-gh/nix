@@ -78,6 +78,16 @@
   };
   services.hardware.bolt.enable = true;
 
+  # Mouse Configuration
+  #
+  # Caps Lock -> Toggle mouse layer on/off
+  # Space -> Activates mouse layer when held
+  # WASD / HJKL -> move the cursor
+  # Q -> Left Click
+  # E -> Right Click
+  # R -> Scroll Up
+  # F -> Scroll Down
+  # C -> Middle Click 
   services.kanata = {
     enable = true;
 
